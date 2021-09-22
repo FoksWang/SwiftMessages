@@ -149,6 +149,7 @@ class ViewController: UITableViewController {
     }
 
     static func demoCentered() {
+        /*
         let messageView: MessageView = MessageView.viewFromNib(layout: .centeredView)
         messageView.configureBackgroundView(width: 250)
         messageView.configureContent(title: "Hey There!", body: "Please try swiping to dismiss this message.", iconImage: nil, iconText: "🦄", buttonImage: nil, buttonTitle: "No Thanks") { _ in
@@ -162,6 +163,23 @@ class ViewController: UITableViewController {
         config.dimMode = .blur(style: .dark, alpha: 1, interactive: true)
         config.presentationContext  = .window(windowLevel: UIWindow.Level.statusBar)
         SwiftMessages.show(config: config, view: messageView)
+        */
+        let messageView: MessageTwoButtonsView = MessageTwoButtonsView.viewFromNib(layout: .centeredTwoButtonsView)
+        messageView.configureBackgroundView(width: 250)
+        messageView.configureContent(title: "Hey There!", body: "Please try swiping to dismiss this message.", iconImage: nil, iconText: "🦄", negativeButtonImage: nil, negativeButtonTitle: "No Thanks", negativeButtonTapHandler: { (button) in
+            SwiftMessages.hide()
+        }, positiveButtonImage: nil, positiveButtonTitle: "Yes Please") { (button) in
+            SwiftMessages.hide()
+        }
+        messageView.backgroundView.backgroundColor = UIColor.init(white: 0.97, alpha: 1)
+        messageView.backgroundView.layer.cornerRadius = 10
+        var config = SwiftMessages.defaultConfig
+        config.presentationStyle = .center
+        config.duration = .forever
+        config.dimMode = .blur(style: .dark, alpha: 1, interactive: true)
+        config.presentationContext  = .window(windowLevel: UIWindow.Level.statusBar)
+        SwiftMessages.show(config: config, view: messageView)
+
     }
 }
 
